@@ -2,35 +2,56 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <h3>
-   <font face="Verdana">Logon Page</font>
-</h3>
-<table>
-   <tr>
-      <td>Email:</td>
-      <td><input id="txtUserName" type="text" runat="server"></td>
-      <td><ASP:RequiredFieldValidator ControlToValidate="txtUserName"
-           Display="Static" ErrorMessage="*" runat="server" 
-           ID="vUserName" /></td>
-   </tr>
-   <tr>
-      <td>Password:</td>
-      <td><input id="txtUserPass" type="password" runat="server"></td>
-      <td><ASP:RequiredFieldValidator ControlToValidate="txtUserPass"
-          Display="Static" ErrorMessage="*" runat="server" 
-          ID="vUserPass" />
-      </td>
-   </tr>
-   <tr>
-      <td>Persistent Cookie:</td>
-      <td><ASP:CheckBox id="chkPersistCookie" runat="server" autopostback="false" /></td>
-      <td>
-       </td>
-   </tr>
-</table>
 
-<input type="submit" Value="Logon" runat="server" ID="cmdLogin"/><p>
-    <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="Button" />
-</p>
+
+    	<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header" align="center">                   
+
+   
+            <asp:Button ID="closelogonbtn" onclick="closelogonbtn_Click" runat="server"  CssClass="close" Text="X" />
+
+                    <h3>
+                       Please log on
+                    </h3>
+                    <img height="200" width="200" class="img-circle" src="logo/gym-dumbbell-black-silhouette-icons--free-download-20.jpg" />                    
+
+				</div>
+                
+                <!-- Begin # DIV Form -->
+                <div id="div-forms">
+                
+                    <!-- Begin # Login Form 
+                    <form id="login-form">
+                        -->
+
+		                <div class="modal-body">
+				    		<div id="div-login-msg">
+                                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-login-msg">Type your username and password.</span>
+                            </div>
+				    		<input runat="server" id="txtUserName" class="form-control" type="text" placeholder="Username (type ERROR for error effect)" required="required"/>
+				    		<input runat="server" id="txtUserPass" class="form-control" type="password" placeholder="Password" required="required"/>
+
+                            <ASP:CheckBox Visible="false" id="chkPersistCookie" runat="server" autopostback="false" />
+
+        		    	</div>
+				        <div class="modal-footer">
+                            <div>
+                               <asp:Button  CssClass="btn btn-primary btn-lg btn-block" ID="loginbtn" runat="server" OnClick="loginbtn_Click" Text="Login" />
+                            </div>
+				    	    <div>
+                                <asp:LinkButton ID="forgotpass" OnClick="forgotpass_Click"  runat="server">Forgot Password?</asp:LinkButton>
+                            </div>
+				        </div>
+                                                                            
+                </div>
+                  
+                
+			</div>
+
+            
+		</div>
+
 
 </asp:Content>

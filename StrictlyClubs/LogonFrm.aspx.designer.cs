@@ -13,6 +13,15 @@ namespace StrictlyClubs {
     public partial class LogonFrm {
         
         /// <summary>
+        /// closelogonbtn control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button closelogonbtn;
+        
+        /// <summary>
         /// txtUserName control.
         /// </summary>
         /// <remarks>
@@ -20,15 +29,6 @@ namespace StrictlyClubs {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtUserName;
-        
-        /// <summary>
-        /// vUserName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator vUserName;
         
         /// <summary>
         /// txtUserPass control.
@@ -40,15 +40,6 @@ namespace StrictlyClubs {
         protected global::System.Web.UI.HtmlControls.HtmlInputPassword txtUserPass;
         
         /// <summary>
-        /// vUserPass control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator vUserPass;
-        
-        /// <summary>
         /// chkPersistCookie control.
         /// </summary>
         /// <remarks>
@@ -58,21 +49,21 @@ namespace StrictlyClubs {
         protected global::System.Web.UI.WebControls.CheckBox chkPersistCookie;
         
         /// <summary>
-        /// cmdLogin control.
+        /// loginbtn control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputSubmit cmdLogin;
+        protected global::System.Web.UI.WebControls.Button loginbtn;
         
         /// <summary>
-        /// Button1 control.
+        /// forgotpass control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.LinkButton forgotpass;
     }
 }

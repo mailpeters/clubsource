@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 using System.Web.Security;
 using System.Data;
 using System.Configuration;
-using StrictlyClubs.classes;
+using StrictlyClubs;
 
 
 namespace StrictlyClubs
@@ -18,19 +18,38 @@ namespace StrictlyClubs
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            FormsAuthentication.SignOut();
+
+            Globals.ClearAll();
 
         }
 
 
-        private bool ValidateUser(string userName, string passWord)
+        private bool ValidateUser(string cuserName, string cpassWord)
         {
-            SqlConnection conn;
-            SqlCommand cmd;
-            string lookupPassword = null;
+
+            bool lActive = false;
+            int  nClientID = 0;
+            bool lIsMatch = false;
+            bool lIsSuperUser = false;
+            int  nUserID = 0;
+
+            // TODO get from a database
+            bool lSalesRole     = false;
+            bool lFrontDeskRole = false;
+            bool lMemberRole    = false;
+            bool lEmployeeRole  = false;
+            bool lOfficeRole    = false;
+            bool lSetupRole     = false;
+
+
+
+
+            SqlConnection myConnection = new SqlConnection(Common.GetConnectionString());
 
             // Check for invalid userName.
             // userName must not be null and must be between 1 and 15 characters.
-            if ((null == userName) || (0 == userName.Length) || (userName.Length > 15))
+            if ((null == cuserName) || (0 == cuserName.Length) || (cuserName.Length > 15))
             {
                 System.Diagnostics.Trace.WriteLine("[ValidateUser] Input validation of userName failed.");
                 return false;
@@ -38,7 +57,7 @@ namespace StrictlyClubs
 
             // Check for invalid passWord.
             // passWord must not be null and must be between 1 and 25 characters.
-            if ((null == passWord) || (0 == passWord.Length) || (passWord.Length > 25))
+            if ((null == cpassWord) || (0 == cpassWord.Length) || (cpassWord.Length > 25))
             {
                 System.Diagnostics.Trace.WriteLine("[ValidateUser] Input validation of passWord failed.");
                 return false;
@@ -46,24 +65,63 @@ namespace StrictlyClubs
 
             try
             {
-                // Consult with your SQL Server administrator for an appropriate connection
-                // string to use to connect to your local SQL Server.
-                //  conn = new SqlConnection("Data Source=GIGANTOR;Initial Catalog=strictlyclubs;Integrated Security=True");    
-                conn = new SqlConnection(common.GetConnectionString());
 
-                conn.Open();
+                using (myConnection)
+                {
 
-                // Create SqlCommand to select pwd field from users table given supplied userName.
-                cmd = new SqlCommand("Select pwd from users where uname=@userName", conn);
-                cmd.Parameters.Add("@userName", SqlDbType.VarChar, 25);
-                cmd.Parameters["@userName"].Value = userName;
+                    SqlCommand oCmd = new SqlCommand("sp_check_login", myConnection);
+                    oCmd.CommandType = CommandType.StoredProcedure;
 
-                // Execute command and fetch pwd field into lookupPassword string.
-                lookupPassword = (string)cmd.ExecuteScalar();
+                    oCmd.Parameters.AddWithValue("@username", cuserName);
+                    oCmd.Parameters.AddWithValue("@password", cpassWord);
 
-                // Cleanup command and connection objects.
-                cmd.Dispose();
-                conn.Dispose();
+
+                    myConnection.Open();
+
+                    using (SqlDataReader oReader = oCmd.ExecuteReader())
+                    {
+
+                        // shoud only have 1 record
+                        if (oReader.Read())
+                        {
+                            // if a record is returned, then there is a match
+                            lIsMatch = true;
+
+                            // todo get from a database
+                            lSalesRole = true;
+                            lFrontDeskRole = true;
+                            lMemberRole = true;
+                            lEmployeeRole = true;
+                            lOfficeRole = true;
+                            lSetupRole = true;
+
+  
+                            nUserID = (Int32)oReader["userID"];
+                            nClientID = (Int32)oReader["clientID"];
+                            lIsSuperUser = (Boolean)oReader["clubsuperuser"];
+
+
+                            lActive = ((bool)oReader["active"]);
+                            if (!lActive)
+                            {
+                                System.Diagnostics.Trace.WriteLine("[Userinactive] User not active.");
+                                return false;
+                            }
+
+                        }
+                        else
+                        {
+                            System.Diagnostics.Trace.WriteLine("[ValidateUser] no matching records.");
+                            return false;
+                        }
+
+                        myConnection.Close();
+
+                    }  // using
+
+                }  // using
+
+
             }
             catch (Exception ex)
             {
@@ -72,26 +130,76 @@ namespace StrictlyClubs
                 System.Diagnostics.Trace.WriteLine("[ValidateUser] Exception " + ex.Message);
             }
 
-            // If no password found, return false.
-            if (null == lookupPassword)
+
+            if (lIsMatch)
             {
-                // You could write failed login attempts here to event log for additional security.
-                return false;
+                Globals.nClientID = nClientID;
+
+                Globals.CurrentUser.lIsSuperUser = lIsSuperUser;
+                Globals.CurrentUser.nCurrentUser = nUserID;
+
+                Globals.CurrentUser.lSalesRole = lSalesRole;
+                Globals.CurrentUser.lFrontDeskRole = lFrontDeskRole;
+                Globals.CurrentUser.lMemberRole = lMemberRole;
+                Globals.CurrentUser.lEmployeeRole = lEmployeeRole;
+                Globals.CurrentUser.lOfficeRole = lOfficeRole;
+                Globals.CurrentUser.lSetupRole = lSetupRole;
             }
 
             // Compare lookupPassword and input passWord, using a case-sensitive comparison.
-            return (0 == string.Compare(lookupPassword, passWord, false));
+            // return (0 == string.Compare(lookupPassword, passWord, false));
+            return lIsMatch;
+
 
         }
 
 
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void loginbtn_Click(object sender, EventArgs e)
         {
+
             if (ValidateUser(txtUserName.Value, txtUserPass.Value))
-                FormsAuthentication.RedirectFromLoginPage(txtUserName.Value, chkPersistCookie.Checked);
+            {
+                FormsAuthenticationTicket tkt;
+                string cookiestr;
+                HttpCookie ck;
+                tkt = new FormsAuthenticationTicket(1, txtUserName.Value, DateTime.Now,
+          DateTime.Now.AddMinutes(30), chkPersistCookie.Checked, "your custom data");
+                cookiestr = FormsAuthentication.Encrypt(tkt);
+                ck = new HttpCookie(FormsAuthentication.FormsCookieName, cookiestr);
+                if (chkPersistCookie.Checked)
+                    ck.Expires = tkt.Expiration;
+                ck.Path = FormsAuthentication.FormsCookiePath;
+                Response.Cookies.Add(ck);
+
+                string strRedirect;
+                strRedirect = Request["ReturnUrl"];
+                if (strRedirect == null)
+                    strRedirect = "default.aspx";
+
+                Response.Redirect(strRedirect, true);
+            }
             else
                 Response.Redirect("logonFrm.aspx", true);
+
         }
+
+
+        protected void forgotpass_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        protected void closelogonbtn_Click(object sender, EventArgs e)
+        {
+            FormsAuthentication.SignOut();
+
+            Globals.ClearAll();
+
+            Response.Redirect("default.aspx", true);
+        }
+
+
     }
 }

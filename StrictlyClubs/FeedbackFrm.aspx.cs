@@ -30,7 +30,7 @@ namespace StrictlyClubs
             {
                 SqlCommand cmd;
 
-                conn = new SqlConnection(classes.common.GetConnectionString());
+                conn = new SqlConnection(Common.GetConnectionString());
               
 
                 conn.Open();

@@ -19,7 +19,9 @@ namespace StrictlyClubs
         protected void Button1_Click(object sender, EventArgs e)
         {
             FormsAuthentication.SignOut();
-            Response.Redirect("logonFrm.aspx", true);
+            FormsAuthentication.RedirectToLoginPage();
+
+            // Response.Redirect("logonFrm.aspx", true);
         }
     }
 }

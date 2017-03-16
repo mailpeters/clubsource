@@ -66,18 +66,33 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AboutusFrm.aspx" />
+    <Content Include="AccessibilityFrm.aspx" />
+    <Content Include="bin\AjaxControlToolkit.dll" />
+    <Content Include="build\jquery.steps.js" />
+    <Content Include="build\jquery.steps.min.js" />
+    <Content Include="Club\ClubSetupWizard.aspx" />
+    <Content Include="Club\ClubWizard.aspx" />
     <Content Include="Employee\EmployeeDefaultFrm.aspx" />
-    <Content Include="nosecurity\FeedbackFrm.aspx" />
+    <Content Include="FeedbackFrm.aspx" />
+    <Content Include="HelpFrm.aspx" />
     <Content Include="font-awesome-4.7.0\css\font-awesome.css" />
     <Content Include="font-awesome-4.7.0\css\font-awesome.min.css" />
     <Content Include="font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
     <Content Include="font-awesome-4.7.0\HELP-US-OUT.txt" />
-    <Content Include="nosecurity\HelpFrm.aspx" />
+    <Content Include="images\gym-dumbbell-black-silhouette-icons--free-download-20.jpg" />
+    <Content Include="JobsFrm.aspx" />
+    <Content Include="sales\fullcalendar.js" />
+    <Content Include="sales\LeadmanagerFrm.aspx" />
     <Content Include="LogonFrm.aspx" />
+    <Content Include="logo\gym-dumbbell-black-silhouette-icons--free-download-20.jpg" />
     <Content Include="logo\onlinelogomaker-020917-1921-1503.png" />
+    <Content Include="maint\usermaint.aspx" />
+    <Content Include="member\newmemberfrm.aspx" />
     <Content Include="packages.config" />
-    <Content Include="nosecurity\Privacy.aspx" />
+    <Content Include="Privacyfrm.aspx" />
     <Content Include="sales\feedbackview.aspx" />
+    <Content Include="sales\SalesCalendarFrm.aspx" />
     <Content Include="Site.Master" />
     <Content Include="banner\assets\.DS_Store" />
     <Content Include="banner\assets\css\.DS_Store" />
@@ -151,7 +166,10 @@
     <Content Include="font-awesome-4.7.0\scss\_screen-reader.scss" />
     <Content Include="font-awesome-4.7.0\scss\_stacked.scss" />
     <Content Include="font-awesome-4.7.0\scss\_variables.scss" />
-    <None Include="Properties\PublishProfiles\strictlyclubs.com - Web Deploy.pubxml" />
+    <Content Include="build\jquery.steps-1.1.0.zip" />
+    <Content Include="build\jQuery.Steps.1.1.0.nupkg" />
+    <None Include="Properties\PublishProfiles\godaddy webdeploy.pubxml" />
+    <None Include="Properties\PublishProfiles\host4asp.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -205,13 +223,42 @@
     <Content Include="logo\4_Grayscale_logo_on_transparent_397x63.png" />
     <Content Include="logo\5_White_logo_on_black_397x63.png" />
     <Content Include="logo\6_Primary_logo_on_color2_397x63.png" />
-    <Content Include="nosecurity\TermsFrm.aspx" />
+    <Content Include="TermsFrm.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutusFrm.aspx.cs">
+      <DependentUpon>AboutusFrm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AboutusFrm.aspx.designer.cs">
+      <DependentUpon>AboutusFrm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AccessibilityFrm.aspx.cs">
+      <DependentUpon>AccessibilityFrm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccessibilityFrm.aspx.designer.cs">
+      <DependentUpon>AccessibilityFrm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="classes\common.cs" />
+    <Compile Include="classes\userinfo.cs" />
+    <Compile Include="Club\ClubSetupWizard.aspx.cs">
+      <DependentUpon>ClubSetupWizard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Club\ClubSetupWizard.aspx.designer.cs">
+      <DependentUpon>ClubSetupWizard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Club\ClubWizard.aspx.cs">
+      <DependentUpon>ClubWizard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Club\ClubWizard.aspx.designer.cs">
+      <DependentUpon>ClubWizard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -226,22 +273,36 @@
     <Compile Include="Employee\EmployeeDefaultFrm.aspx.designer.cs">
       <DependentUpon>EmployeeDefaultFrm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="nosecurity\FeedbackFrm.aspx.cs">
+    <Compile Include="FeedbackFrm.aspx.cs">
       <DependentUpon>FeedbackFrm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="nosecurity\FeedbackFrm.aspx.designer.cs">
+    <Compile Include="FeedbackFrm.aspx.designer.cs">
       <DependentUpon>FeedbackFrm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HelpFrm.aspx.cs">
+      <DependentUpon>HelpFrm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HelpFrm.aspx.designer.cs">
+      <DependentUpon>HelpFrm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="nosecurity\HelpFrm.aspx.cs">
-      <DependentUpon>HelpFrm.aspx</DependentUpon>
+    <Compile Include="JobsFrm.aspx.cs">
+      <DependentUpon>JobsFrm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="nosecurity\HelpFrm.aspx.designer.cs">
-      <DependentUpon>HelpFrm.aspx</DependentUpon>
+    <Compile Include="JobsFrm.aspx.designer.cs">
+      <DependentUpon>JobsFrm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="sales\LeadmanagerFrm.aspx.cs">
+      <DependentUpon>LeadmanagerFrm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sales\LeadmanagerFrm.aspx.designer.cs">
+      <DependentUpon>LeadmanagerFrm.aspx</DependentUpon>
     </Compile>
     <Compile Include="LogonFrm.aspx.cs">
       <DependentUpon>LogonFrm.aspx</DependentUpon>
@@ -250,12 +311,26 @@
     <Compile Include="LogonFrm.aspx.designer.cs">
       <DependentUpon>LogonFrm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="nosecurity\Privacy.aspx.cs">
-      <DependentUpon>Privacy.aspx</DependentUpon>
+    <Compile Include="maint\usermaint.aspx.cs">
+      <DependentUpon>usermaint.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="nosecurity\Privacy.aspx.designer.cs">
-      <DependentUpon>Privacy.aspx</DependentUpon>
+    <Compile Include="maint\usermaint.aspx.designer.cs">
+      <DependentUpon>usermaint.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="member\newmemberfrm.aspx.cs">
+      <DependentUpon>newmemberfrm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="member\newmemberfrm.aspx.designer.cs">
+      <DependentUpon>newmemberfrm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Privacyfrm.aspx.cs">
+      <DependentUpon>Privacyfrm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Privacyfrm.aspx.designer.cs">
+      <DependentUpon>Privacyfrm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="sales\feedbackview.aspx.cs">
@@ -265,6 +340,13 @@
     <Compile Include="sales\feedbackview.aspx.designer.cs">
       <DependentUpon>feedbackview.aspx</DependentUpon>
     </Compile>
+    <Compile Include="sales\SalesCalendarFrm.aspx.cs">
+      <DependentUpon>SalesCalendarFrm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="sales\SalesCalendarFrm.aspx.designer.cs">
+      <DependentUpon>SalesCalendarFrm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -272,16 +354,17 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
-    <Compile Include="nosecurity\TermsFrm.aspx.cs">
+    <Compile Include="TermsFrm.aspx.cs">
       <DependentUpon>TermsFrm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="nosecurity\TermsFrm.aspx.designer.cs">
+    <Compile Include="TermsFrm.aspx.designer.cs">
       <DependentUpon>TermsFrm.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="bin\roslyn\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>

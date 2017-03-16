@@ -4,7 +4,6 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
-    <head>
 
     <script>
 
@@ -132,7 +131,6 @@
 
     </script>
 
-</head>
 
 <style>
 
@@ -142,8 +140,6 @@
 
 
 <div class="container">
-
-<form class="well form-horizontal" action=" " method="post"  id="contact_form">
 
 <fieldset>
 
@@ -193,7 +189,7 @@
         <div class="col-md-9 inputGroupContainer">
         <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
-      <input name="phone" placeholder="(845)555-1212" class="form-control" type="text">
+            <input name="phone" placeholder="(845)555-1212" class="form-control" type="text">
         </div>
       </div>
     </div>
@@ -230,7 +226,7 @@
         <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
         <select name="state" class="form-control selectpicker" >
-          <option value=" " >Please select your state</option>
+          <option >Please select your state</option>
           <option>Alabama</option>
           <option>Alaska</option>
           <option >Arizona</option>
@@ -353,7 +349,9 @@
     </div>
 
 </fieldset>
-</form>
+
+
+
 </div>
    
 
